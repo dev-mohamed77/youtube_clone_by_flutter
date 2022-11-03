@@ -19,4 +19,5 @@ class StringsConfig {
       "Sign in to see updates from your favorite YouTube channels";
   static const String signIn = "SIGN IN";
   static const String youtube = "Youtube";
+  static const String uploadedVideos = "Uploaded videos";
 }

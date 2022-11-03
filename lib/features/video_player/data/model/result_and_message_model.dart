@@ -3,21 +3,25 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class GetStatusSubscriber extends Equatable {
+class ResultAndMessageModel extends Equatable {
   final bool status;
   final bool result;
-  const GetStatusSubscriber({
+  final String message;
+  const ResultAndMessageModel({
     required this.status,
     required this.result,
+    required this.message,
   });
 
-  GetStatusSubscriber copyWith({
+  ResultAndMessageModel copyWith({
     bool? status,
     bool? result,
+    String? message,
   }) {
-    return GetStatusSubscriber(
+    return ResultAndMessageModel(
       status: status ?? this.status,
       result: result ?? this.result,
+      message: message ?? this.message,
     );
   }
 
@@ -25,24 +29,27 @@ class GetStatusSubscriber extends Equatable {
     return <String, dynamic>{
       'status': status,
       'result': result,
+      'message': message,
     };
   }
 
-  factory GetStatusSubscriber.fromMap(Map<String, dynamic> map) {
-    return GetStatusSubscriber(
+  factory ResultAndMessageModel.fromMap(Map<String, dynamic> map) {
+    return ResultAndMessageModel(
       status: map['status'] as bool,
       result: map['result'] as bool,
+      message: map['message'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GetStatusSubscriber.fromJson(String source) =>
-      GetStatusSubscriber.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ResultAndMessageModel.fromJson(String source) =>
+      ResultAndMessageModel.fromMap(
+          json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object> get props => [status, result];
+  List<Object> get props => [status, result, message];
 }

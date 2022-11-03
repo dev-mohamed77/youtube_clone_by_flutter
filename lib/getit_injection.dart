@@ -9,6 +9,9 @@ import 'features/auth/data/datasource/auth_local_database.dart';
 import 'features/auth/data/datasource/auth_remote_datasource.dart';
 import 'features/auth/data/repository_imp/reposetory_imp.dart';
 import 'features/auth/domain/repository/repository.dart';
+import 'features/profile/data/data_source/profile_remote_datasource.dart';
+import 'features/profile/data/repository_imp/profile_repository_imp.dart';
+import 'features/profile/domain/repository/profile_repository.dart';
 import 'features/video_player/data/repository_imp/video_player_repository_imp.dart';
 
 GetIt getIt = GetIt.instance;
@@ -57,6 +60,19 @@ void init() {
   getIt.registerFactory<VideoPlayerRepository>(
     () => VideoPlayerRepositoryImp(
       remoteDataSource: getIt<VideoPlayerRemoteDataSource>(),
+    ),
+  );
+
+  // Profile
+  getIt.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImp(
+      netWorkService: getIt<NetWorkService>(),
+    ),
+  );
+
+  getIt.registerFactory<ProfileRepository>(
+    () => ProfileRepositoryImp(
+      remoteDataSource: getIt<ProfileRemoteDataSource>(),
     ),
   );
 }

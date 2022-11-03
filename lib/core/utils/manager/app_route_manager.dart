@@ -4,6 +4,7 @@ import 'package:youtube_clone/features/auth/presentation/pages/login/login_scree
 import 'package:youtube_clone/features/auth/presentation/pages/register/register_screen.dart';
 import 'package:youtube_clone/features/auth/presentation/pages/welcome/welcome_screen.dart';
 import 'package:youtube_clone/features/home/presentation/pages/home_screen.dart';
+import 'package:youtube_clone/features/profile/presentation/pages/profile_screen.dart';
 import 'package:youtube_clone/features/splash/presentation/pages/splash_screen.dart';
 import 'package:youtube_clone/features/video_player/presentation/pages/video_player_screen.dart';
 
@@ -20,6 +21,8 @@ class AppRouteManager {
         return RegisterScreen.route();
       case HomeScreen.id:
         return HomeScreen.route();
+      case ProfileScreen.id:
+        return ProfileScreen.route();
       case VideoPlayerScreen.id:
         return VideoPlayerScreen.route();
       default:

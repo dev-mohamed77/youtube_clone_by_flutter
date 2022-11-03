@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:youtube_clone/core/services/network_services/api_result.dart';
 import 'package:youtube_clone/core/services/network_services/error_handle.dart';
 import 'package:youtube_clone/features/home/data/datasource/home_remote_datasource.dart';
@@ -14,12 +16,21 @@ class HomeRepositoryImp implements HomeRepository {
   });
 
   @override
-  Future<ApiResult<VideoWithMessage>> addVideo() async {
+  Future<ApiResult<VideoWithMessage>> addVideo({
+    required File videoFile,
+    required String title,
+    required String description,
+  }) async {
     try {
-      final response = await remoteDataSource.addVideo();
+      final response = await remoteDataSource.addVideo(
+        description: description,
+        title: title,
+        videoFile: videoFile,
+      );
 
       return ApiResult.success(response);
     } catch (err) {
+      print(err);
       return ApiResult.failure(ErrorHandle.getDioException(err));
     }
   }

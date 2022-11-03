@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 abstract class NetWorkService {
@@ -8,12 +6,14 @@ abstract class NetWorkService {
     Map<String, dynamic>? queryParams,
     String? token,
   });
+
   Future<Response<T>> postData<T>(
     String url, {
     Map<String, dynamic>? queryParams,
-    Map<String, dynamic>? data,
+    dynamic data,
     String? token,
   });
+
   Future<Response<T>> updateData<T>(
     String url, {
     Map<String, dynamic>? queryParams,
@@ -63,7 +63,7 @@ class DioService implements NetWorkService {
   Future<Response<T>> postData<T>(
     String url, {
     Map<String, dynamic>? queryParams,
-    Map<String, dynamic>? data,
+    dynamic data,
     String? token,
   }) {
     dio.options.headers = {
@@ -91,7 +91,7 @@ class DioService implements NetWorkService {
     return dio.put(
       url,
       queryParameters: queryParams,
-      data: jsonEncode(data),
+      data: data,
     );
   }
 

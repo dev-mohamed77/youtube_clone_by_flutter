@@ -149,7 +149,7 @@ class VideoPlayerDataModel extends Equatable {
       desLike: map['desLike'] ?? "",
       desLikeStatus: map['desLike_status'] ?? false,
       createdAt: map['created_at'] ?? "",
-      updatedAt: map['updated_at'],
+      updatedAt: map['updated_at'] ?? "",
     );
   }
 

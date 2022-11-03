@@ -11,6 +11,7 @@ class CustomSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       floating: true,
       leadingWidth: 120,
+      titleTextStyle: Theme.of(context).textTheme.bodyLarge,
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
@@ -22,10 +23,15 @@ class CustomSliverAppBar extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            Text(
-              StringsConfig.youtube,
-              style:
-                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
+            Flexible(
+              child: Text(
+                StringsConfig.youtube,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 14),
+              ),
             ),
           ],
         ),
@@ -49,7 +55,7 @@ class CustomSliverAppBar extends StatelessWidget {
           icon: const CircleAvatar(
             foregroundImage: AssetImage("assets/images/profile.jpg"),
           ),
-        )
+        ),
       ],
     );
   }

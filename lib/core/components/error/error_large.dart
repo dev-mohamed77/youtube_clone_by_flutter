@@ -19,37 +19,41 @@ class ErrorScreenLarge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        controller: ScrollController(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ErrorImageHandle(
-              width: 200,
-              pathImage: pathImage,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ErrorText(
-              text: title,
-              bold: true,
-              size: 20,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const ErrorText(
-              text: StringsConfig.notFoundDesc,
-              color: Colors.grey,
-              size: 20,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            if (isButtonLogin) const OutlinedButtonLoginCustom()
-          ],
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: SingleChildScrollView(
+          controller: ScrollController(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ErrorImageHandle(
+                width: 200,
+                pathImage: pathImage,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ErrorText(
+                text: title,
+                bold: true,
+                size: 20,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const ErrorText(
+                text: StringsConfig.notFoundDesc,
+                color: Colors.grey,
+                size: 20,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              if (isButtonLogin) const OutlinedButtonLoginCustom()
+            ],
+          ),
         ),
       ),
     );

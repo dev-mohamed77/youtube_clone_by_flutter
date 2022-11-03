@@ -3,20 +3,20 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class MessageResultModel extends Equatable {
+class MessageModel extends Equatable {
   final bool status;
   final String result;
 
-  const MessageResultModel({
+  const MessageModel({
     required this.status,
     required this.result,
   });
 
-  MessageResultModel copyWith({
+  MessageModel copyWith({
     bool? status,
     String? result,
   }) {
-    return MessageResultModel(
+    return MessageModel(
       status: status ?? this.status,
       result: result ?? this.result,
     );
@@ -29,8 +29,8 @@ class MessageResultModel extends Equatable {
     };
   }
 
-  factory MessageResultModel.fromMap(Map<String, dynamic> map) {
-    return MessageResultModel(
+  factory MessageModel.fromMap(Map<String, dynamic> map) {
+    return MessageModel(
       status: map['status'] as bool,
       result: map['result'] as String,
     );
@@ -38,8 +38,8 @@ class MessageResultModel extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory MessageResultModel.fromJson(String source) =>
-      MessageResultModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MessageModel.fromJson(String source) =>
+      MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

@@ -1,25 +1,37 @@
 import 'package:youtube_clone/core/services/network_services/api_result.dart';
+import 'package:youtube_clone/features/video_player/data/model/comments_model.dart';
 
-import '../../../home/data/model/get_status_sbscriber.dart';
-import '../../data/model/message_result_model.dart';
+import '../../data/model/add_comment_model.dart';
+import '../../data/model/likes_and_deslikes_model.dart';
+import '../../data/model/result_and_message_model.dart';
+import '../../data/model/message_model.dart';
 import '../../data/model/video_player_model.dart';
 
 abstract class VideoPlayerRepository {
   Future<ApiResult<VideoPlayerModel>> getVideo(String videoId); //
-  Future<ApiResult<MessageResultModel>> addView(String videoId); //
+  Future<ApiResult<MessageModel>> addView(String videoId); //
   // likes and desLikes
-  Future<ApiResult<MessageResultModel>> addLikeForVideo();
-  Future<ApiResult<MessageResultModel>> addDesLikeForVideo();
-  Future<ApiResult<MessageResultModel>> deleteLikeForVideo();
-  Future<ApiResult<MessageResultModel>> deleteDesLikeForVideo();
+  Future<ApiResult<LikesAndDesLikesModel>> addLikeAndDeleteForVideo(
+      String videoID); //
+  Future<ApiResult<LikesAndDesLikesModel>> addDesLikeAndDeleteForVideo(
+      String videoID); //
   // comments
-  Future<ApiResult<MessageResultModel>> addComment();
-  Future getCommentsByVideo(); //
-  Future getCommentById();
-  Future<ApiResult<MessageResultModel>> deleteComment();
-  Future updateComment();
+  Future<ApiResult<AddCommentModel>> addComment(
+      String videoID, String title); //
+  Future<ApiResult<List<CommentModel>>> getCommentsByVideo({
+    required String videoID,
+    required String pages,
+    required String limit,
+  }); //
+  Future<ApiResult<CommentModel>> getCommentById(String commentID); //
+  Future<ApiResult<MessageModel>> deleteComment(String commentID); //
+  Future<ApiResult<MessageModel>> updateComment(
+    String commentID,
+    String title,
+  ); //
   // subscriber
-  Future<ApiResult<MessageResultModel>> addSubscriber();
-  Future<ApiResult<GetStatusSubscriber>> getStatusSubscriberChannel(); //
-  Future<ApiResult<MessageResultModel>> addSubscriberAndUnSubscriber();
+  Future<ApiResult<ResultAndMessageModel>> getStatusSubscriberChannel(
+      String userID); //
+  Future<ApiResult<ResultAndMessageModel>> addSubscribe(String userID); //
+  Future<ApiResult<ResultAndMessageModel>> unSubscribe(String userID); //
 }

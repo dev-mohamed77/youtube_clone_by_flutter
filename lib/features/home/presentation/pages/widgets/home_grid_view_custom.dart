@@ -4,16 +4,22 @@ import 'package:youtube_clone/core/components/loading_custom.dart';
 import 'package:youtube_clone/core/components/responsive.dart';
 import 'package:youtube_clone/core/utils/config/assets_config.dart';
 import 'package:youtube_clone/core/utils/config/strings_config.dart';
-import 'package:youtube_clone/features/home/presentation/pages/widgets/video_card.dart';
+import 'package:youtube_clone/core/components/video_card.dart';
+import 'package:youtube_clone/features/profile/presentation/pages/profile_screen.dart';
 
 import '../../../../../core/components/error/error_screen.dart';
+import '../../../../profile/presentation/pages/profile_screen_small.dart';
 import '../../blocs/home_bloc/home_bloc.dart';
 import '../../blocs/home_bloc/home_state.dart';
 
 class HomeGridViewCustom extends StatelessWidget {
   const HomeGridViewCustom({
     Key? key,
-  }) : super(key: key);
+    bool isMiniPlayerPadding = false,
+  })  : _isMiniPlayerPadding = isMiniPlayerPadding,
+        super(key: key);
+
+  final bool _isMiniPlayerPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +30,35 @@ class HomeGridViewCustom extends StatelessWidget {
         } else if (state is HomeStateGetVideosSuccess) {
           return state.videos.isNotEmpty
               ? Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: _isMiniPlayerPadding
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.all(15),
                   child: GridView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.videos.length,
-                      controller: ScrollController(),
-                      padding: Responsive.isMobile(context) ||
-                              Responsive.isTablet(context)
-                          ? EdgeInsets.zero
-                          : const EdgeInsets.only(
-                              left: 45,
-                              top: 20.0,
-                              right: 60,
-                              bottom: 100.0,
-                            ),
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 400,
-                        mainAxisExtent: 310,
-                        crossAxisSpacing: 15.0,
-                        mainAxisSpacing: 15.0,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return VideoCard(
-                          video: state.videos[index],
-                        );
-                      }),
+                    shrinkWrap: true,
+                    itemCount: state.videos.length,
+                    controller: ScrollController(),
+                    padding: Responsive.isMobile(context) ||
+                            Responsive.isTablet(context)
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.only(
+                            left: 45,
+                            top: 20.0,
+                            right: 60,
+                            bottom: 100.0,
+                          ),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 400,
+                      mainAxisExtent: 310,
+                      crossAxisSpacing: 15.0,
+                      mainAxisSpacing: 15.0,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return VideoCard(
+                        video: state.videos[index],
+                      );
+                    },
+                  ),
                 )
               : const Center(
                   child: Text(StringsConfig.noVideos),

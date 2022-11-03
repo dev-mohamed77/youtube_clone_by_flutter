@@ -15,4 +15,10 @@ class AppNavigatorManager {
       (route) => false,
     );
   }
+
+  static void navigatorPush(BuildContext ctx, Widget screen) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(builder: (ctx) => screen),
+    );
+  }
 }
